@@ -1,28 +1,31 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class CreateArtistInput {
+export class CreateBandInput {
   @Field(() => String, { nullable: true })
-  firstName?: string;
+  name?: string;
 
   @Field(() => String, { nullable: true })
-  secondName?: string;
+  origin?: string;
 
   @Field(() => String, { nullable: true })
-  middleName?: string;
+  yearsActive?: string;
 
   @Field(() => String, { nullable: true })
-  birthDate?: string;
+  labels?: string;
+
+  @Field(() => [String], { nullable: 'itemsAndList' })
+  members?: string[];
 
   @Field(() => String, { nullable: true })
-  birthPlace?: string;
+  pastMembers?: string;
 
   @Field(() => String, { nullable: true })
-  deathDate?: string;
+  website?: string;
 
   @Field(() => String, { nullable: true })
-  deathPlace?: string;
+  genres?: string;
 
   @Field(() => String, { nullable: true })
-  country?: string;
+  logo?: string;
 }

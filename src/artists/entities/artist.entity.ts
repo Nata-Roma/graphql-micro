@@ -5,39 +5,39 @@ export class Artist {
   @Field(() => ID)
   _id: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   firstName?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   secondName?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   middleName?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   birthDate?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   birthPlace?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   deathDate?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   deathPlace?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   country?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   bands?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   instruments?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   pseudonims?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   labels?: string;
 }

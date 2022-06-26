@@ -27,11 +27,26 @@ type Artist {
   labels: String
 }
 
+type Band {
+  _id: ID!
+  name: String
+  origin: String
+  yearsActive: String
+  labels: String
+  members: [String]
+  pastMembers: String
+  website: String
+  genres: String
+  logo: String
+}
+
 type Query {
   users: [User!]!
   user(id: String!): User
   artists: [Artist]
   artist(id: String!): Artist!
+  bands: [Band!]!
+  band(id: String!): Band!
 }
 
 type Mutation {
@@ -41,6 +56,9 @@ type Mutation {
   createArtist(createArtistInput: CreateArtistInput!): Artist!
   updateArtist(updateArtistInput: UpdateArtistInput!): Artist!
   removeArtist(id: String!): Artist!
+  createBand(createBandInput: CreateBandInput!): Band!
+  updateBand(updateBandInput: UpdateBandInput!): Band!
+  removeBand(id: String!): Band
 }
 
 input CreateUserInput {
@@ -74,5 +92,30 @@ input UpdateArtistInput {
   deathDate: String
   deathPlace: String
   country: String
+  _id: ID!
+}
+
+input CreateBandInput {
+  name: String
+  origin: String
+  yearsActive: String
+  labels: String
+  members: [String]
+  pastMembers: String
+  website: String
+  genres: String
+  logo: String
+}
+
+input UpdateBandInput {
+  name: String
+  origin: String
+  yearsActive: String
+  labels: String
+  members: [String!]
+  pastMembers: String
+  website: String
+  genres: String
+  logo: String
   _id: ID!
 }
