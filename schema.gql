@@ -1,0 +1,78 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: ID!
+  firstName: String!
+  secondName: String!
+  middleName: String
+  password: String!
+  email: String!
+}
+
+type Artist {
+  _id: ID!
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  deathDate: String
+  deathPlace: String
+  country: String
+  bands: String
+  instruments: String
+  pseudonims: String
+  labels: String
+}
+
+type Query {
+  users: [User!]!
+  user(id: String!): User
+  artists: [Artist]
+  artist(id: String!): Artist!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createArtist(createArtistInput: CreateArtistInput!): Artist!
+  updateArtist(updateArtistInput: UpdateArtistInput!): Artist!
+  removeArtist(id: String!): Artist!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateArtistInput {
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  deathDate: String
+  deathPlace: String
+  country: String
+}
+
+input UpdateArtistInput {
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  deathDate: String
+  deathPlace: String
+  country: String
+  _id: ID!
+}
