@@ -5,15 +5,15 @@ export class User {
   @Field(() => ID) //<- GraphQL
   _id: string; //<- TypeScript
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   firstName: string;
 
-  @Field(() => String)
-  secondName: string;
+  @Field(() => String, { name: 'secondName', nullable: true })
+  lastName: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   middleName?: string;
-  
+
   @Field(() => String)
   password: string;
 

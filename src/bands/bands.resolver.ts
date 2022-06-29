@@ -14,7 +14,7 @@ export class BandsResolver {
     return this.bandsService.create(createBandInput, token);
   }
 
-  @Query(() => [Band], { name: 'bands' })
+  @Query(() => [Band], { name: 'bands', nullable: 'itemsAndList' })
   findAll() {
     return this.bandsService.findAll();
   }

@@ -1,28 +1,30 @@
-import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import { CreateArtistInput } from './dto/create-artist.input';
-import { UpdateArtistInput } from './dto/update-artist.input';
+import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
+import { CreateGenreInput } from './dto/create-genre.input';
+import { UpdateGenreInput } from './dto/update-genre.input';
 
 @Injectable()
-export class ArtistsService {
+export class GenresService {
   private client = null;
   constructor(config: ConfigService) {
-    this.client = axios.create({ baseURL: config.get('ARTIST_URL') });
+    this.client = axios.create({ baseURL: config.get('GENRE_URL') });
   }
 
-  async create(createArtistInput: CreateArtistInput, token: string) {
+  async create(createGenreInput: CreateGenreInput, token: string) {
     const headers = {
       Authorization: token,
     };
 
     const data = {
-      ...createArtistInput,
+      ...createGenreInput,
     };
-
     const resp = await this.client.post('', data, {
       headers,
     });
+
+    console.log(createGenreInput);
+    
     return resp.data;
   }
 
@@ -32,23 +34,17 @@ export class ArtistsService {
   }
 
   async findOne(id: string) {
-    console.log('Service', id);
-    
     const resp = await this.client.get(`/${id}`);
     return resp.data;
   }
 
-  async update(
-    id: string,
-    updateArtistInput: UpdateArtistInput,
-    token: string,
-  ) {
+  async update(id: string, updateGenreInput: UpdateGenreInput, token: string) {
     const headers = {
       Authorization: token,
     };
 
     const data = {
-      ...updateArtistInput,
+      ...updateGenreInput,
     };
 
     const resp = await this.client.put(`/${id}`, data, {
@@ -62,9 +58,9 @@ export class ArtistsService {
     const headers = {
       Authorization: token,
     };
-    const resp = await this.client.delete(`/${id}`, {headers});
-    if(resp.data.acknowledged && resp.data.deletedCount === 1) {
-      return {_id: id}
+    const resp = await this.client.delete(`/${id}`, { headers });
+    if (resp.data.acknowledged && resp.data.deletedCount === 1) {
+      return { _id: id };
     }
     return resp;
   }

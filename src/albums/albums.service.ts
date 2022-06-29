@@ -1,23 +1,23 @@
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import { CreateArtistInput } from './dto/create-artist.input';
-import { UpdateArtistInput } from './dto/update-artist.input';
+import { CreateAlbumInput } from './dto/create-album.input';
+import { UpdateAlbumInput } from './dto/update-album.input';
 import axios from 'axios';
 
 @Injectable()
-export class ArtistsService {
+export class AlbumsService {
   private client = null;
   constructor(config: ConfigService) {
-    this.client = axios.create({ baseURL: config.get('ARTIST_URL') });
+    this.client = axios.create({ baseURL: config.get('ALBUM_URL') });
   }
 
-  async create(createArtistInput: CreateArtistInput, token: string) {
+  async create(createAlbumInput: CreateAlbumInput, token: string) {
     const headers = {
       Authorization: token,
     };
 
     const data = {
-      ...createArtistInput,
+      ...createAlbumInput,
     };
 
     const resp = await this.client.post('', data, {
@@ -32,28 +32,25 @@ export class ArtistsService {
   }
 
   async findOne(id: string) {
-    console.log('Service', id);
-    
     const resp = await this.client.get(`/${id}`);
     return resp.data;
   }
 
-  async update(
-    id: string,
-    updateArtistInput: UpdateArtistInput,
-    token: string,
-  ) {
+  async update(id: string, updateAlbumInput: UpdateAlbumInput, token: string) {
     const headers = {
       Authorization: token,
     };
 
     const data = {
-      ...updateArtistInput,
+      ...updateAlbumInput,
     };
 
     const resp = await this.client.put(`/${id}`, data, {
       headers,
     });
+
+    console.log(resp.data);
+    
 
     return resp.data;
   }
@@ -62,9 +59,9 @@ export class ArtistsService {
     const headers = {
       Authorization: token,
     };
-    const resp = await this.client.delete(`/${id}`, {headers});
-    if(resp.data.acknowledged && resp.data.deletedCount === 1) {
-      return {_id: id}
+    const resp = await this.client.delete(`/${id}`, { headers });
+    if (resp.data.acknowledged && resp.data.deletedCount === 1) {
+      return { _id: id };
     }
     return resp;
   }

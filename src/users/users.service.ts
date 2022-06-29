@@ -1,3 +1,4 @@
+import { LoginUserInput } from './dto/login-user.input';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
@@ -8,10 +9,17 @@ import axios from 'axios';
 export class UsersService {
   private client = null;
   constructor(config: ConfigService) {
-    this.client = axios.create({baseURL: config.get('USER_URL')})
+    this.client = axios.create({ baseURL: config.get('USER_URL') });
   }
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+
+  async create(createUserInput: CreateUserInput) {
+    const data = {
+      ...createUserInput,
+    };
+
+    const resp = await this.client.post('/register', data);
+
+    return resp.data;
   }
 
   findAll() {
@@ -29,5 +37,11 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  async login(loginUserInput: LoginUserInput) {
+    const resp = await this.client.post(`/login`, loginUserInput);
+    
+    return resp.data;
   }
 }

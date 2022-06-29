@@ -7,6 +7,10 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
 import { BandsModule } from './bands/bands.module';
+import { GenresModule } from './genres/genres.module';
+import { AlbumsModule } from './albums/albums.module';
+import { TracksModule } from './tracks/tracks.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 @Module({
   imports: [
@@ -23,6 +27,10 @@ import { BandsModule } from './bands/bands.module';
     UsersModule,
     ArtistsModule,
     BandsModule,
+    GenresModule,
+    AlbumsModule,
+    TracksModule,
+    FavouritesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

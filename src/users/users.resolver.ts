@@ -1,3 +1,5 @@
+import { Token } from './entities/token.entity';
+import { LoginUserInput } from './dto/login-user.input';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
@@ -31,5 +33,10 @@ export class UsersResolver {
   @Mutation(() => User)
   removeUser(@Args('id', { type: () => Int }) id: number) {
     return this.usersService.remove(id);
+  }
+
+  @Query(() => Token, {name: 'jwt'})
+  loginUser(@Args('loginUserInput') loginUserInput: LoginUserInput) {
+    return this.usersService.login(loginUserInput);
   }
 }

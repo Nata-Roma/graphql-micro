@@ -11,24 +11,12 @@ export class Band {
   @Field(() => String, { nullable: true })
   origin?: string;
 
-  @Field(() => String, { nullable: true })
-  yearsActive?: string;
-
-  @Field(() => String, { nullable: true })
-  labels?: string;
-
   @Field(() => [String], { nullable: 'itemsAndList' })
   members?: string[];
 
   @Field(() => String, { nullable: true })
-  pastMembers?: string;
-
-  @Field(() => String, { nullable: true })
   website?: string;
 
-  @Field(() => String, { nullable: true })
-  genres?: string;
-
-  @Field(() => String, { nullable: true })
-  logo?: string;
+  @Field(() => [ID], { name: 'genres', nullable: 'itemsAndList' })
+  genresIds?: string[];
 }

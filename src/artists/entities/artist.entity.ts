@@ -21,23 +21,11 @@ export class Artist {
   birthPlace?: string;
 
   @Field(() => String, { nullable: true })
-  deathDate?: string;
-
-  @Field(() => String, { nullable: true })
-  deathPlace?: string;
-
-  @Field(() => String, { nullable: true })
   country?: string;
 
-  @Field(() => String, { nullable: true })
-  bands?: string;
+  @Field(() => [ID], { nullable: 'itemsAndList' })
+  bands?: string[];
 
-  @Field(() => String, { nullable: true })
-  instruments?: string;
-
-  @Field(() => String, { nullable: true })
-  pseudonims?: string;
-
-  @Field(() => String, { nullable: true })
-  labels?: string;
+  @Field(() => [ID], { nullable: 'itemsAndList' })
+  instruments?: string[];
 }
