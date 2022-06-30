@@ -13,7 +13,6 @@ export class TracksService {
   }
 
   async create(createTrackInput: CreateTrackInput, token: string) {
-
     const headers = {
       Authorization: token,
     };
@@ -29,8 +28,12 @@ export class TracksService {
   }
 
   async findAll(pagingTrackInput: PagingTrackInput) {
-    const { limit, offset } = pagingTrackInput;
-    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
+    let query = '';
+    if (pagingTrackInput) {
+      const { limit, offset } = pagingTrackInput;
+      query = `?limit=${limit}&offset=${offset}`;
+    }
+    const resp = await this.client.get(query);
     return resp.data.items;
   }
 

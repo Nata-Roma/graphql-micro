@@ -28,8 +28,12 @@ export class GenresService {
   }
 
   async findAll(pagingGenreInput: PagingGenreInput) {
-    const { limit, offset } = pagingGenreInput;
-    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
+    let query = '';
+    if(pagingGenreInput) {
+      const { limit, offset } = pagingGenreInput;
+      query = `?limit=${limit}&offset=${offset}`
+    }
+    const resp = await this.client.get(query);
     return resp.data.items;
   }
 

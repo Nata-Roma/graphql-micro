@@ -28,8 +28,12 @@ export class BandsService {
   }
 
   async findAll(pagingBandInput: PagingBandInput) {
-    const { limit, offset } = pagingBandInput;
-    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
+    let query = '';
+    if(pagingBandInput) {
+      const { limit, offset } = pagingBandInput;
+      query = `?limit=${limit}&offset=${offset}`
+    }
+    const resp = await this.client.get(query);
     return resp.data.items;
   }
 

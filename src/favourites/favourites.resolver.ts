@@ -60,7 +60,7 @@ export class FavouritesResolver {
     return this.favouritesService.remove(id, token);
   }
 
-  @ResolveField('genres', () => [Genre])
+  @ResolveField('genres', () => [Genre], {nullable: 'itemsAndList'})
   getGenres(@Parent() favorite: Favourite) {
     const { genresIds } = favorite;
 
@@ -73,7 +73,7 @@ export class FavouritesResolver {
     return promises;
   }
 
-  @ResolveField('tracks', () => [Track])
+  @ResolveField('tracks', () => [Track], {nullable: 'itemsAndList'})
   getTracks(@Parent() favorite: Favourite) {
     const { tracksIds } = favorite;
 
@@ -86,7 +86,7 @@ export class FavouritesResolver {
     return promises;
   }
 
-  @ResolveField('bands', () => [Band])
+  @ResolveField('bands', () => [Band], {nullable: 'itemsAndList'})
   getBands(@Parent() favorite: Favourite) {
     const { bandsIds } = favorite;
 
@@ -99,7 +99,7 @@ export class FavouritesResolver {
     return promises;
   }
 
-  @ResolveField('artists', () => [Artist])
+  @ResolveField('artists', () => [Artist], {nullable: 'itemsAndList'})
   getArtists(@Parent() favorite: Favourite) {
     const { artistsIds } = favorite;
 

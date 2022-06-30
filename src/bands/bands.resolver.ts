@@ -39,7 +39,7 @@ export class BandsResolver {
     return this.bandsService.remove(id, token);
   }
 
-  @ResolveField('genres', () => [Genre])
+  @ResolveField('genres', () => [Genre], {nullable: 'itemsAndList'})
   getTracks(@Parent() band: Band) {
     const { genresIds } = band;
 

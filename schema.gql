@@ -15,13 +15,19 @@ type User {
   email: String!
 }
 
+type Member {
+  artist: String
+  instrument: String
+  years: [String]
+}
+
 type Band {
   _id: ID!
   name: String
   origin: String
-  members: [String]
+  members: [Member]
   website: String
-  genres: [Genre!]!
+  genres: [Genre]
 }
 
 type Artist {
@@ -32,7 +38,7 @@ type Artist {
   birthDate: String
   birthPlace: String
   country: String
-  bands: [Band!]!
+  bands: [Band]
   instruments: [ID]
 }
 
@@ -50,29 +56,29 @@ type Track {
   album: ID
   duration: Int
   released: Int
-  bands: [Band!]!
-  genres: [Genre!]!
-  artists: [Artist!]!
+  bands: [Band]
+  genres: [Genre]
+  artists: [Artist]
 }
 
 type Album {
   _id: ID!
   name: String
   released: Int
-  artists: [Artist!]!
-  bands: [Band!]!
-  genres: [Genre!]!
-  tracks: [Track!]!
+  artists: [Artist]
+  bands: [Band]
+  genres: [Genre]
+  tracks: [Track]
   image: String
 }
 
 type Favourite {
   _id: ID!
   userId: ID!
-  bands: [Band!]!
-  genres: [Genre!]!
-  artists: [Artist!]!
-  tracks: [Track!]!
+  bands: [Band]
+  genres: [Genre]
+  artists: [Artist]
+  tracks: [Track]
 }
 
 type Query {
@@ -189,15 +195,21 @@ input UpdateArtistInput {
 input CreateBandInput {
   name: String
   origin: String
-  members: [String]
+  members: [CreateMemberInput]
   website: String
   genresIds: [ID]
+}
+
+input CreateMemberInput {
+  artist: String
+  instrument: String
+  years: [String]
 }
 
 input UpdateBandInput {
   name: String
   origin: String
-  members: [String!]
+  members: [CreateMemberInput!]
   website: String
   genresIds: [ID!]
   _id: ID!

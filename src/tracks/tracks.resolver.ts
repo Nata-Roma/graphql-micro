@@ -69,7 +69,7 @@ export class TracksResolver {
     return this.tracksService.remove(id, token);
   }
 
-  @ResolveField('genres', () => [Genre])
+  @ResolveField('genres', () => [Genre], {nullable: 'itemsAndList'})
   getGenres(@Parent() track: Track) {
     const { genresIds } = track;
 
@@ -82,7 +82,7 @@ export class TracksResolver {
     return promises;
   }
 
-  @ResolveField('bands', () => [Band])
+  @ResolveField('bands', () => [Band], {nullable: 'itemsAndList'})
   getBands(@Parent() track: Track) {
     const { bandsIds } = track;
 
@@ -95,7 +95,7 @@ export class TracksResolver {
     return promises;
   }
 
-  @ResolveField('artists', () => [Artist])
+  @ResolveField('artists', () => [Artist], {nullable: 'itemsAndList'})
   getArtists(@Parent() track: Track) {
     const { artistsIds } = track;
 

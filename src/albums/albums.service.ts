@@ -28,9 +28,12 @@ export class AlbumsService {
   }
 
   async findAll( pagingAlbumInput?: PagingAlbumInput) {
-    const { limit, offset } = pagingAlbumInput;
-
-    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
+    let query = '';
+    if(pagingAlbumInput) {
+      const { limit, offset } = pagingAlbumInput;
+      query = `?limit=${limit}&offset=${offset}`
+    }
+    const resp = await this.client.get(query);
     return resp.data.items;
   }
 

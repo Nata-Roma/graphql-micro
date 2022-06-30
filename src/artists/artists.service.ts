@@ -28,10 +28,12 @@ export class ArtistsService {
   }
 
   async findAll(pagingArtistInput: PagingArtistInput) {
-    console.log(pagingArtistInput);
-    const { limit, offset } = pagingArtistInput;
-
-    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
+    let query = '';
+    if(pagingArtistInput) {
+      const { limit, offset } = pagingArtistInput;
+      query = `?limit=${limit}&offset=${offset}`
+    }
+    const resp = await this.client.get(query);
     return resp.data.items;
   }
 

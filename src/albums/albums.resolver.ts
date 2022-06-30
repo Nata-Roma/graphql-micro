@@ -73,7 +73,7 @@ export class AlbumsResolver {
     return this.albumsService.remove(id, token);
   }
 
-  @ResolveField('artists', () => [Artist])
+  @ResolveField('artists', () => [Artist], {nullable: 'itemsAndList'})
   getArtists(@Parent() album: Album) {
     const { artistsIds } = album;
 
@@ -86,7 +86,7 @@ export class AlbumsResolver {
     return promises;
   }
 
-  @ResolveField('bands', () => [Band])
+  @ResolveField('bands', () => [Band], {nullable: 'itemsAndList'})
   getBands(@Parent() album: Album) {
     const { bandsIds } = album;
 
@@ -99,7 +99,7 @@ export class AlbumsResolver {
     return promises;
   }
 
-  @ResolveField('genres', () => [Genre])
+  @ResolveField('genres', () => [Genre], {nullable: 'itemsAndList'})
   getGenres(@Parent() album: Album) {
     const { genresIds } = album;
 
@@ -112,7 +112,7 @@ export class AlbumsResolver {
     return promises;
   }
 
-  @ResolveField('tracks', () => [Track])
+  @ResolveField('tracks', () => [Track], {nullable: 'itemsAndList'})
   getTracks(@Parent() album: Album) {
     const { trackIds } = album;
 
