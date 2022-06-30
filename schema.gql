@@ -15,6 +15,15 @@ type User {
   email: String!
 }
 
+type Band {
+  _id: ID!
+  name: String
+  origin: String
+  members: [String]
+  website: String
+  genres: [Genre!]!
+}
+
 type Artist {
   _id: ID!
   firstName: String
@@ -23,17 +32,8 @@ type Artist {
   birthDate: String
   birthPlace: String
   country: String
-  bands: [ID]
+  bands: [Band!]!
   instruments: [ID]
-}
-
-type Band {
-  _id: ID!
-  name: String
-  origin: String
-  members: [String]
-  website: String
-  genres: [ID]
 }
 
 type Genre {
@@ -47,11 +47,12 @@ type Genre {
 type Track {
   _id: ID!
   title: String
-  albums: String
+  album: ID
   duration: Int
   released: Int
-  bands: [Band]
-  genres: [Genre]
+  bands: [Band!]!
+  genres: [Genre!]!
+  artists: [Artist!]!
 }
 
 type Album {
@@ -68,10 +69,10 @@ type Album {
 type Favourite {
   _id: ID!
   userId: ID!
-  bands: [ID!]!
-  genres: [ID!]!
-  artists: [ID!]!
-  tracks: [ID!]!
+  bands: [Band!]!
+  genres: [Genre!]!
+  artists: [Artist!]!
+  tracks: [Track!]!
 }
 
 type Query {
@@ -144,7 +145,7 @@ input CreateArtistInput {
   birthDate: String
   birthPlace: String
   country: String
-  bands: [ID]
+  bandsIds: [ID]
   instruments: [ID]
 }
 
@@ -155,7 +156,7 @@ input UpdateArtistInput {
   birthDate: String
   birthPlace: String
   country: String
-  bands: [ID!]
+  bandsIds: [ID!]
   instruments: [ID!]
   _id: ID!
 }
@@ -216,10 +217,11 @@ input UpdateAlbumInput {
 input CreateTrackInput {
   title: String!
   albumId: ID
-  duration: Int!
-  released: Int!
+  duration: Int
+  released: Int
   bandsIds: [String]
-  genresIds: [String!]!
+  genresIds: [String]
+  artistsIds: [String]
 }
 
 input UpdateTrackInput {
@@ -229,6 +231,7 @@ input UpdateTrackInput {
   released: Int
   bandsIds: [String!]
   genresIds: [String!]
+  artistsIds: [String!]
   _id: String!
 }
 

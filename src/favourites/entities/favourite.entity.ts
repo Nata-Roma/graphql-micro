@@ -9,14 +9,14 @@ export class Favourite {
   userId: string;
 
   @Field(() => [ID], {name: "bands"})
-  bandsIds: string;
+  bandsIds: string[];
 
   @Field(() => [ID], {name: "genres"})
-  genresIds: string;
+  genresIds: string[];
 
   @Field(() => [ID], {name: "artists"})
-  artistsIds: string;
+  artistsIds: string[];
 
   @Field(() => [ID], {name: "tracks"})
-  tracksIds: string;
+  tracksIds: string[];
 }

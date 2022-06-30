@@ -22,8 +22,6 @@ export class GenresService {
     const resp = await this.client.post('', data, {
       headers,
     });
-
-    console.log(createGenreInput);
     
     return resp.data;
   }

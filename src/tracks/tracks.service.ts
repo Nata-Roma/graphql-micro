@@ -24,9 +24,6 @@ export class TracksService {
     const resp = await this.client.post('', data, {
       headers,
     });
-
-    console.log(resp.data);
-    
     return resp.data;
   }
 

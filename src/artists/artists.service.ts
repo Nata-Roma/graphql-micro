@@ -32,8 +32,6 @@ export class ArtistsService {
   }
 
   async findOne(id: string) {
-    console.log('Service', id);
-    
     const resp = await this.client.get(`/${id}`);
     return resp.data;
   }

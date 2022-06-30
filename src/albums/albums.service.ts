@@ -49,9 +49,6 @@ export class AlbumsService {
       headers,
     });
 
-    console.log(resp.data);
-    
-
     return resp.data;
   }
 

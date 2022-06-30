@@ -1,6 +1,4 @@
-import { Genre } from './../../genres/entities/genre.entity';
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
-import { Band } from 'src/bands/entities/band.entity';
 
 @ObjectType()
 export class Track {
@@ -10,8 +8,8 @@ export class Track {
   @Field(() => String, { nullable: true })
   title: string;
 
-  @Field(() => String, { nullable: true })
-  albums: String;
+  @Field(() => ID, { name: 'album', nullable: true })
+  albumsId: string;
 
   @Field(() => Int, { nullable: true })
   duration: number;
@@ -19,9 +17,12 @@ export class Track {
   @Field(() => Int, { nullable: true })
   released: number;
 
-  @Field(() => [Band], { nullable: 'itemsAndList' })
-  bands: Band[];
+  @Field(() => [ID], { name: 'bands', nullable: 'itemsAndList' })
+  bandsIds: string[];
 
-  @Field(() => [Genre], { nullable: 'itemsAndList' })
-  genres: Genre;
+  @Field(() => [ID], { name: 'genres', nullable: 'itemsAndList' })
+  genresIds: string[];
+
+  @Field(() => [ID], { name: 'artists', nullable: 'itemsAndList' })
+  artistsIds: string[];
 }

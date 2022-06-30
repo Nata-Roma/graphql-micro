@@ -21,7 +21,7 @@ export class CreateArtistInput {
   country?: string;
 
   @Field(() => [ID], { nullable: 'itemsAndList' })
-  bands?: string[];
+  bandsIds?: string[];
 
   @Field(() => [ID], { nullable: 'itemsAndList' })
   instruments?: string[];
