@@ -1,3 +1,4 @@
+import { PagingAlbumInput } from './dto/paging-album.input';
 import { Track } from './../tracks/entities/track.entity';
 import { Genre } from './../genres/entities/genre.entity';
 import { TracksService } from './../tracks/tracks.service';
@@ -41,8 +42,8 @@ export class AlbumsResolver {
   }
 
   @Query(() => [Album], { name: 'albums', nullable: 'itemsAndList' })
-  findAll() {
-    return this.albumsService.findAll();
+  findAll(@Args('pagingAlbumInput', {nullable: true}) pagingAlbumInput?: PagingAlbumInput) {
+    return this.albumsService.findAll(pagingAlbumInput);
   }
 
   @Query(() => Album, { name: 'album' })

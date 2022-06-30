@@ -1,3 +1,4 @@
+import { PagingGenreInput } from './dto/paging-genre.input';
 import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
 import { GenresService } from './genres.service';
 import { Genre } from './entities/genre.entity';
@@ -18,8 +19,8 @@ export class GenresResolver {
   }
 
   @Query(() => [Genre], { name: 'genres', nullable: 'itemsAndList' })
-  findAll() {
-    return this.genresService.findAll();
+  findAll(@Args('pagingGenreInput', {nullable: true}) pagingGenreInput?: PagingGenreInput) {
+    return this.genresService.findAll(pagingGenreInput);
   }
 
   @Query(() => Genre, { name: 'genre' })

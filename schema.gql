@@ -79,15 +79,15 @@ type Query {
   users: [User!]!
   user(id: String!): User
   jwt(loginUserInput: LoginUserInput!): Token!
-  artists: [Artist]
+  artists(pagingArtistInput: PagingArtistInput): [Artist]
   artist(id: String!): Artist!
-  bands: [Band]
+  bands(pagingBandInput: PagingBandInput): [Band]
   band(id: String!): Band!
-  genres: [Genre]
+  genres(pagingGenreInput: PagingGenreInput): [Genre]
   genre(id: String!): Genre!
-  albums: [Album]
+  albums(pagingAlbumInput: PagingAlbumInput): [Album]
   album(id: String!): Album!
-  tracks: [Track]
+  tracks(pagingTrackInput: PagingTrackInput): [Track]
   track(id: String!): Track!
   favourites: Favourite
 }
@@ -95,6 +95,31 @@ type Query {
 input LoginUserInput {
   password: String!
   email: String!
+}
+
+input PagingArtistInput {
+  offset: Int = 0
+  limit: Int = 5
+}
+
+input PagingBandInput {
+  offset: Int = 0
+  limit: Int = 5
+}
+
+input PagingGenreInput {
+  offset: Int = 0
+  limit: Int = 5
+}
+
+input PagingAlbumInput {
+  offset: Int = 0
+  limit: Int = 5
+}
+
+input PagingTrackInput {
+  offset: Int = 0
+  limit: Int = 5
 }
 
 type Mutation {

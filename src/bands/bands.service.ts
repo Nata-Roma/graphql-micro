@@ -1,3 +1,4 @@
+import { PagingBandInput } from './dto/paging-band.input';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { CreateBandInput } from './dto/create-band.input';
@@ -26,8 +27,9 @@ export class BandsService {
     return resp.data;
   }
 
-  async findAll() {
-    const resp = await this.client.get();
+  async findAll(pagingBandInput: PagingBandInput) {
+    const { limit, offset } = pagingBandInput;
+    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
     return resp.data.items;
   }
 

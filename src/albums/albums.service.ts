@@ -1,3 +1,4 @@
+import { PagingAlbumInput } from './dto/paging-album.input';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { CreateAlbumInput } from './dto/create-album.input';
@@ -26,8 +27,10 @@ export class AlbumsService {
     return resp.data;
   }
 
-  async findAll() {
-    const resp = await this.client.get();
+  async findAll( pagingAlbumInput?: PagingAlbumInput) {
+    const { limit, offset } = pagingAlbumInput;
+
+    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
     return resp.data.items;
   }
 

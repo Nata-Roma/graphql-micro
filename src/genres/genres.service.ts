@@ -1,3 +1,4 @@
+import { PagingGenreInput } from './dto/paging-genre.input';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
@@ -26,8 +27,9 @@ export class GenresService {
     return resp.data;
   }
 
-  async findAll() {
-    const resp = await this.client.get();
+  async findAll(pagingGenreInput: PagingGenreInput) {
+    const { limit, offset } = pagingGenreInput;
+    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
     return resp.data.items;
   }
 

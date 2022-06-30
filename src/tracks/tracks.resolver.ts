@@ -1,3 +1,4 @@
+import { PagingTrackInput } from './dto/paging-track.input';
 import { Band } from './../bands/entities/band.entity';
 import { ArtistsService } from './../artists/artists.service';
 import { GenresService } from './../genres/genres.service';
@@ -37,8 +38,8 @@ export class TracksResolver {
   }
 
   @Query(() => [Track], { name: 'tracks', nullable: 'itemsAndList' })
-  findAll() {
-    return this.tracksService.findAll();
+  findAll(@Args('pagingTrackInput', {nullable: true}) pagingTrackInput?: PagingTrackInput) {
+    return this.tracksService.findAll(pagingTrackInput);
   }
 
   @Query(() => Track, { name: 'track' })

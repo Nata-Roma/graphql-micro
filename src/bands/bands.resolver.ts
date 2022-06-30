@@ -1,3 +1,4 @@
+import { PagingBandInput } from './dto/paging-band.input';
 import { GenresService } from './../genres/genres.service';
 import { Genre } from './../genres/entities/genre.entity';
 import { Resolver, Query, Mutation, Args, Int, Context, ResolveField, Parent } from '@nestjs/graphql';
@@ -17,8 +18,8 @@ export class BandsResolver {
   }
 
   @Query(() => [Band], { name: 'bands', nullable: 'itemsAndList' })
-  findAll() {
-    return this.bandsService.findAll();
+  findAll(@Args('pagingBandInput', {nullable: true}) pagingBandInput?: PagingBandInput) {
+    return this.bandsService.findAll(pagingBandInput);
   }
 
   @Query(() => Band, { name: 'band' })

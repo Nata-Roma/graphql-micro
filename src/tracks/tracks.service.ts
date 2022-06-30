@@ -1,3 +1,4 @@
+import { PagingTrackInput } from './dto/paging-track.input';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
@@ -27,8 +28,9 @@ export class TracksService {
     return resp.data;
   }
 
-  async findAll() {
-    const resp = await this.client.get();
+  async findAll(pagingTrackInput: PagingTrackInput) {
+    const { limit, offset } = pagingTrackInput;
+    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
     return resp.data.items;
   }
 

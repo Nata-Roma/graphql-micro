@@ -1,3 +1,4 @@
+import { PagingArtistInput } from './dto/paging-artist.input';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { CreateArtistInput } from './dto/create-artist.input';
@@ -26,8 +27,11 @@ export class ArtistsService {
     return resp.data;
   }
 
-  async findAll() {
-    const resp = await this.client.get();
+  async findAll(pagingArtistInput: PagingArtistInput) {
+    console.log(pagingArtistInput);
+    const { limit, offset } = pagingArtistInput;
+
+    const resp = await this.client.get(`?limit=${limit}&offset=${offset}`);
     return resp.data.items;
   }
 
@@ -60,9 +64,9 @@ export class ArtistsService {
     const headers = {
       Authorization: token,
     };
-    const resp = await this.client.delete(`/${id}`, {headers});
-    if(resp.data.acknowledged && resp.data.deletedCount === 1) {
-      return {_id: id}
+    const resp = await this.client.delete(`/${id}`, { headers });
+    if (resp.data.acknowledged && resp.data.deletedCount === 1) {
+      return { _id: id };
     }
     return resp;
   }

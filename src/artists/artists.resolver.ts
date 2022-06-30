@@ -1,3 +1,4 @@
+import { PagingArtistInput } from './dto/paging-artist.input';
 import { BandsService } from './../bands/bands.service';
 import { Band } from './../bands/entities/band.entity';
 import { Resolver, Query, Mutation, Args, Int, Context, ResolveField, Parent } from '@nestjs/graphql';
@@ -17,8 +18,8 @@ export class ArtistsResolver {
   }
 
   @Query(() => [Artist], { name: 'artists', nullable: 'itemsAndList' })
-  findAll() {
-    return this.artistsService.findAll();
+  findAll(@Args('pagingArtistInput', {nullable: true}) pagingArtistInput?: PagingArtistInput) {
+    return this.artistsService.findAll(pagingArtistInput);
   }
 
   @Query(() => Artist, { name: 'artist' })
